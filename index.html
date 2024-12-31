@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.json">
+        <!-- Service Worker -->
+        <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+            .then(() => console.log('Service Worker Registered'))
+            .catch(err => console.error('Service Worker Registration Failed:', err));
+        }
+        </script>
+</head>
+<body>
+    <header>
+        <img src="bigIcon.png" alt=""width="40px" style="float : left; margin-left :10px;">
+        <h1 style = "text-align: center;">School Assistant - L1</h1>
+    </header>
+    <BR>
+    <div class="card">This is the body of my first page - I don't have much to put here yet</div>
+    <div class="card">This is the <a href="page1.html">link</a> to my timetable</div>
+</body>
+</html>

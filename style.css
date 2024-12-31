@@ -1,0 +1,47 @@
+/* Now my comment */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+     padding: 0;
+}
+header {
+    background-color: green;
+    color: #fff;
+    padding: 10px 0;
+}
+.card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+}
+/* Stuff for the timetable layout */
+.week {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  .day {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  .daytitle {
+    background-color: #0044cc;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+  }
+  .period {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+  }
+  .period:first-of-type {
+    border-top: none;
+  }
