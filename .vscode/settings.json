@@ -7,15 +7,21 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "editor.fontSize": 18,
-  "terminal.integrated.defaultProfile.windows": "Git Bash",
-  "window.restoreWindows": "preserve",
-  "workbench.editorAssociations": {
-    "*.md": "vscode.markdown.preview.editor"
-  },
+  // "editor.fontSize": 18,
+  // "terminal.integrated.defaultProfile.windows": "Git Bash",
+  // "window.restoreWindows": "preserve",
+  // "workbench.editorAssociations": {
+  //   "*.md": "vscode.markdown.preview.editor"
+  // },
 
   "files.exclude": {
   "**/.git": false
+  },
+  "terminal.integrated.defaultProfile.windows": "Git Bash", "terminal.integrated.profiles.windows": 
+  {
+    "Git Bash": {
+        "path": "C:\\Program Files\\Git\\bin\\bash.exe"
+    }
+  }
 }
 
-}
