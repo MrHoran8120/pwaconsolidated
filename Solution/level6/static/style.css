@@ -1,0 +1,104 @@
+body {
+  background-color: #f0f0f0;
+
+  font-family: Arial, sans-serif;
+
+  margin: 0;
+
+  padding: 0;
+}
+
+header {
+  background-color: green;
+
+  color: #fff;
+
+  padding: 10px 0;
+}
+
+.card {
+  background-color: #fff;
+
+  border-radius: 5px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  margin: 20px;
+
+  padding: 20px;
+}
+
+/* Stuff for the timetable layout */
+
+.week {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  gap: 15px;
+}
+
+.day {
+  background-color: white;
+
+  border: 1px solid #ddd;
+
+  border-radius: 8px;
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  overflow: hidden;
+}
+
+.daytitle {
+  background-color: #0044cc;
+
+  color: white;
+
+  font-weight: bold;
+
+  text-align: center;
+
+  padding: 10px;
+}
+
+.period {
+  padding: 10px;
+
+  border-top: 1px solid #ddd;
+
+  text-align: center;
+}
+
+.period:first-of-type {
+  border-top: none;
+}
+.notes {
+  width: 90%; /* Make the textarea take most of the container's width */
+
+  margin: 10px auto; /* Add spacing around the textarea */
+
+  display: block; /* Center the textarea */
+
+  padding: 10px; /* Add padding inside the textarea */
+
+  border: 1px solid #ccc; /* Light gray border */
+
+  border-radius: 5px; /* Rounded corners */
+
+  font-size: 1rem; /* Adjust font size */
+
+  font-family: Arial, sans-serif; /* Set font */
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+
+  resize: vertical; /* Allow vertical resizing only */
+}
+
+.notes:focus {
+  border-color: #007bff; /* Highlighted border color when focused */
+
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add glow effect on focus */
+
+  outline: none; /* Remove default outline */
+}
