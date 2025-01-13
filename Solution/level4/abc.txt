@@ -1,0 +1,316 @@
+from flask import Flask, render_template
+from flask import send_from_directory
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/page1')
+def page1():
+    return render_template('page1.html')
+
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory('static', 'manifest.json', mimetype='application/json')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+document.addEventListener("DOMContentLoaded", () => {
+  // Load notes from localStorage
+
+  document.querySelectorAll(".day").forEach((day) => {
+    const dayTitle = day.querySelector(".daytitle").textContent;
+
+    const notesField = day.querySelector(".notes");
+
+    const savedNotes = localStorage.getItem(`notes_${dayTitle}`);
+
+    if (savedNotes) {
+      notesField.value = savedNotes;
+    }
+  });
+
+  // Add event listener to the Save Notes button
+
+  const saveNotesButton = document.querySelector("#save-notes-btn");
+
+  saveNotesButton.addEventListener("click", () => {
+    document.querySelectorAll(".day").forEach((day) => {
+      const dayTitle = day.querySelector(".daytitle").textContent;
+
+      const notesField = day.querySelector(".notes");
+
+      localStorage.setItem(`notes_${dayTitle}`, notesField.value);
+    });
+
+    alert("All notes have been saved!");
+  });
+
+  console.log("Notes loaded successfully on page load.");
+});
+const CACHE_NAME = "pwa-cache-v2";  // Increment version to force update
+const urlsToCache = [
+  "/",
+  "/index.html",
+  "/page1.html",
+  "/style.css",
+  "/bigIcon.png",
+  "/favicon.ico"
+];
+
+// Note that this is coded to minimise caching. This decreases performance but makes debugging easier
+self.addEventListener("install", event => {
+  // Immediately activate the service worker without caching anything
+  self.skipWaiting();
+  console.log("Service Worker installed. No caching performed.");
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cache => caches.delete(cache))
+      );
+    }).then(() => {
+      console.log("All caches cleared during activation.");
+      return self.clients.claim();
+    })
+  );
+});
+
+// Fetch event - Always bypass cache and fetch from network
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    fetch(event.request).catch(() => {
+      // Fallback to index.html for navigation requests if offline
+      if (event.request.mode === "navigate") {
+        return fetch("/index.html");
+      }
+    })
+  );
+});
+body {
+  background-color: #f0f0f0;
+
+  font-family: Arial, sans-serif;
+
+  margin: 0;
+
+  padding: 0;
+}
+
+header {
+  background-color: green;
+
+  color: #fff;
+
+  padding: 10px 0;
+}
+
+.card {
+  background-color: #fff;
+
+  border-radius: 5px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  margin: 20px;
+
+  padding: 20px;
+}
+
+/* Stuff for the timetable layout */
+
+.week {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  gap: 15px;
+}
+
+.day {
+  background-color: white;
+
+  border: 1px solid #ddd;
+
+  border-radius: 8px;
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  overflow: hidden;
+}
+
+.daytitle {
+  background-color: #0044cc;
+
+  color: white;
+
+  font-weight: bold;
+
+  text-align: center;
+
+  padding: 10px;
+}
+
+.period {
+  padding: 10px;
+
+  border-top: 1px solid #ddd;
+
+  text-align: center;
+}
+
+.period:first-of-type {
+  border-top: none;
+}
+.notes {
+  width: 90%; /* Make the textarea take most of the container's width */
+
+  margin: 10px auto; /* Add spacing around the textarea */
+
+  display: block; /* Center the textarea */
+
+  padding: 10px; /* Add padding inside the textarea */
+
+  border: 1px solid #ccc; /* Light gray border */
+
+  border-radius: 5px; /* Rounded corners */
+
+  font-size: 1rem; /* Adjust font size */
+
+  font-family: Arial, sans-serif; /* Set font */
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+
+  resize: vertical; /* Allow vertical resizing only */
+}
+
+.notes:focus {
+  border-color: #007bff; /* Highlighted border color when focused */
+
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add glow effect on focus */
+
+  outline: none; /* Remove default outline */
+}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <!-- Manifest -->
+    <link rel="manifest" href="{{ url_for('manifest') }}" />
+    <!-- Service Worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("{{ url_for('static', filename='service-worker.js') }})
+          .then(() => console.log("Service Worker Registered"))
+          .catch((err) =>
+            console.error("Service Worker Registration Failed:", err)
+          );
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='bigIcon.png') }}"
+        alt=""
+        width="40px"
+        style="float: left; margin-left: 10px"
+      />
+      <h1 style="text-align: center">School Assistant - L6</h1>
+    </header>
+    <br />
+    <div class="card">
+      This is the body of my first page - I don't have much to put here yet
+    </div>
+    <div class="card">
+      This is the <a href="{{ url_for('page1') }}">link</a> to my timetable
+    </div>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+  <body>
+    <header>
+      <a href="{{ url_for('index') }}"
+        ><img
+          src="{{ url_for('static', filename='bigIcon.png') }}"
+          alt=""
+          width="40px"
+          style="float: left; margin-left: 10px"
+      /></a>
+      <h1 style="text-align: center">School Assistant</h1>
+    </header>
+    <div class="week">
+      <div class="day">
+        <div class="daytitle">Monday</div>
+        <div class="period">Period 1 : Mathz</div>
+        <div class="period">Period 2 : Free</div>
+        <div class="period">Period 3 : Free</div>
+        <div class="period">Period 4 : English</div>
+        <textarea class="notes" placeholder="Enter notes for Monday"></textarea>
+      </div>
+      <div class="day">
+        <div class="daytitle">Tuesday</div>
+        <div class="period">Period 1 : CT</div>
+        <div class="period">Period 2 : Free</div>
+        <div class="period">Period 3 : Free</div>
+        <div class="period">Period 4 : English</div>
+        <textarea
+          class="notes"
+          placeholder="Enter notes for Tuesday"
+        ></textarea>
+      </div>
+      <div class="day">
+        <div class="daytitle">Wednesday</div>
+        <div class="period">Period 1 : SE</div>
+        <div class="period">Period 2 : CT</div>
+        <div class="period">Period 3 : Free</div>
+        <div class="period">Period 4 : English</div>
+        <textarea
+          class="notes"
+          placeholder="Enter notes for Wednesday"
+        ></textarea>
+      </div>
+      <div class="day">
+        <div class="daytitle">Thursday</div>
+        <div class="period">Period 1 : Maths</div>
+        <div class="period">Period 2 : Free</div>
+        <div class="period">Period 3 : SE</div>
+        <div class="period">Period 4 : English</div>
+        <textarea
+          class="notes"
+          placeholder="Enter notes for Thursday"
+        ></textarea>
+      </div>
+      <div class="day">
+        <div class="daytitle">Friday</div>
+        <div class="period">Period 1 : Maths</div>
+        <div class="period">Period 2 : Free</div>
+        <div class="period">Period 3 : CT</div>
+        <div class="period">Period 4 : English</div>
+        <textarea class="notes" placeholder="Enter notes for Friday"></textarea>
+      </div>
+    </div>
+     <button id="save-notes-btn" style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 1000;"> Save Notes
+  </body>
+</html>
